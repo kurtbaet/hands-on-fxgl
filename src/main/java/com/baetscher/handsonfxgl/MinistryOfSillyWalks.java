@@ -66,17 +66,22 @@ public class MinistryOfSillyWalks extends GameApplication {
 //            animIdle = new AnimationChannel(FXGL.image("newdude.png"), 4, 32, 42, Duration.seconds(1), 1, 1);
 //            animWalk = new AnimationChannel(FXGL.image("newdude.png"), 4, 32, 42, Duration.seconds(1), 0, 3);
 
-            animIdle = new AnimationChannel(FXGL.image("bluebear.png"),
-                    3, 230, 196, Duration.seconds(1), 4, 4);
-            animWalk = new AnimationChannel(FXGL.image("bluebear.png"),
-                    3, 230, 196, Duration.seconds(1), 0, 5);
+//            animIdle = new AnimationChannel(FXGL.image("bluebear.png"),
+//                    3, 230, 196, Duration.seconds(1), 4, 4);
+//            animWalk = new AnimationChannel(FXGL.image("bluebear.png"),
+//                    3, 230, 196, Duration.seconds(1), 0, 5);
+
+            animIdle = new AnimationChannel(FXGL.image("TheMinistryofSillyWalks.png"),
+                    4, 280, 400, Duration.seconds(2), 0, 0);
+            animWalk = new AnimationChannel(FXGL.image("TheMinistryofSillyWalks.png"),
+                    4, 280, 400, Duration.seconds(2), 0, 7);
 
             texture = new AnimatedTexture(animIdle);
         }
 
         @Override
         public void onAdded() {
-            entity.getTransformComponent().setScaleOrigin(new Point2D(16, 21));
+            entity.getTransformComponent().setScaleOrigin(new Point2D(140, 200));
             entity.getViewComponent().addChild(texture);
         }
 
