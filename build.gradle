@@ -1,10 +1,10 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.javamodularity.moduleplugin' version '1.8.12'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
-    id 'org.beryx.jlink' version '2.25.0'
-    id 'org.jetbrains.kotlin.jvm' version '1.9.0-RC'
+    id 'org.javamodularity.moduleplugin' version '1.8.15'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'org.beryx.jlink' version '3.1.1'
+    id 'org.jetbrains.kotlin.jvm' version '2.1.10'
 }
 
 group 'com.baetscher'
@@ -15,11 +15,8 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.9.2'
+    junitVersion = '5.12.0'
 }
-
-sourceCompatibility = '17'
-targetCompatibility = '17'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -31,19 +28,19 @@ application {
 }
 
 javafx {
-    version = '17.0.6'
+    version = '21.0.6'
     modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
 }
 
 dependencies {
-    implementation('com.github.almasb:fxgl:17.3') {
+    implementation('com.github.almasb:fxgl:21.1') {
         exclude(group: 'org.openjfx')
         exclude(group: 'org.jetbrains.kotlin')
     }
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 test {
@@ -51,14 +48,13 @@ test {
 }
 
 jlink {
-    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+    imageZip = layout.buildDirectory.file("distributions/app-${javafx.platform.classifier}.zip").get().asFile
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
         name = 'app'
     }
-
-
 }
+
 
 jlinkZip {
     group = 'distribution'
@@ -66,11 +62,11 @@ jlinkZip {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "21"
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "21"
     }
 }
